@@ -1,0 +1,22 @@
+[user]
+	email = mueryidao@gmail.com
+	name = Thomas
+[github]
+	user = mueryidao
+	token = e295f53b6640e0b8af13544e6a9ed4656495bfd5
+[gui]
+[filter "lfs"]
+	required = true
+	clean = git-lfs clean %f
+	smudge = git-lfs smudge %f
+[core]
+	editor = vi
+	autocrlf = true
+[credential]
+[alias]
+	st = status
+	co = checkout
+	ci = commit
+	br = branch
+	last = log -1
+	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
