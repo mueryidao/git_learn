@@ -1,0 +1,95 @@
+1. create repo
+    $ mkdir learngit
+    $ cd learngit
+    $ pwd
+    /Users/michael/learngit
+
+    $ git init
+    Initialized empty Git repository in /Users/michael/learngit/.git/
+
+    $ git add readme.txt
+
+    $ git commit -m "wrote a readme file"
+    [master (root-commit) cb926e7] wrote a readme file
+     1 file changed, 2 insertions(+)
+      create mode 100644 readme.txt
+
+    ps:
+    $ git add file1.txt
+    $ git add file2.txt file3.txt
+    $ git commit -m "add 3 files."
+
+    Summary:
+    初始化一个Git仓库，使用git init命令。
+
+    添加文件到Git仓库，分两步：
+
+    第一步，使用命令git add <file>，注意，可反复多次使用，添加多个文件；
+
+    第二步，使用命令git commit，完成。
+
+2. time back
+    $ git status
+    # On branch master
+    # Changes not staged for commit:
+    #   (use "git add <file>..." to update what will be committed)
+    #   (use "git checkout -- <file>..." to discard changes in working directory)
+    #
+    #    modified:   readme.txt
+    #
+    no changes added to commit (use "git add" and/or "git commit -a")
+
+    $ git diff readme.txt 
+    diff --git a/readme.txt b/readme.txt
+    index 46d49bf..9247db6 100644
+    --- a/readme.txt
+    +++ b/readme.txt
+    @@ -1,2 +1,2 @@
+    -Git is a version control system.
+    +Git is a distributed version control system.
+     Git is free software.
+
+    Summary:
+    要随时掌握工作区的状态，使用git status命令。
+
+    如果git status告诉你有文件被修改过，用git diff可以查看修改内容。
+
+3. version back
+   $ git log --pretty=oneline 
+
+   $ git reset --hard HEAD^
+   HEAD is now at ea34578 add distributed
+
+   $ git reset --hard 3628164
+   HEAD is now at 3628164 append GPL
+
+   $ git reflog
+   ea34578 HEAD@{0}: reset: moving to HEAD^
+   3628164 HEAD@{1}: commit: append GPL
+   ea34578 HEAD@{2}: commit: add distributed
+   cb926e7 HEAD@{3}: commit (initial): wrote a readme file
+
+   Summary:
+   HEAD指向的版本就是当前版本，因此，Git允许我们在版本的历史之间穿梭，使用命令git reset --hard commit_id。
+
+   穿梭前，用git log可以查看提交历史，以便确定要回退到哪个版本。
+
+   要重返未来，用git reflog查看命令历史，以便确定要回到未来的哪个版本。
+
+4. Manage modification
+    提交后，用git diff HEAD -- readme.txt命令可以查看工作区和版本库里面最新版本的区别：
+
+    $ git diff HEAD -- readme.txt 
+    diff --git a/readme.txt b/readme.txt
+    index 76d770f..a9c5755 100644
+    --- a/readme.txt
+    +++ b/readme.txt
+    @@ -1,4 +1,4 @@
+     Git is a distributed version control system.
+      Git is free software distributed under the GPL.
+       Git has a mutable index called stage.
+       -Git tracks changes.
+       +Git tracks changes of files.
+
+    Summary:
+    Git是如何跟踪修改的，每次修改，如果不add到暂存区，那就不会加入到commit中。
